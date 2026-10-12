@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Operations Specialist</title>
+  <meta name="description" content="Training guide for the Operations Specialist role.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ccircle cx='23' cy='9' r='3' fill='%231e7a4c'/%3E%3Ctext x='8' y='23' font-family='Arial' font-weight='700' font-size='18' fill='%23fff'%3EO%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <button class="icon-btn only-mobile" id="nav-btn" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+    </button>
+    <a class="brand" href="#intro" aria-label="Home">
+      <span class="brand-mark">O</span>
+      <span class="brand-name">Operations Specialist</span>
+      <span class="brand-sub">Training guide</span>
+    </a>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-label="Contents">
+    <nav id="nav"></nav>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+
+    <!-- ===================== INTRODUCTION ===================== -->
+    <section class="page" id="intro" data-title="Introduction">
+      <p class="eyebrow">Training guide</p>
+      <h1 class="display">Operations Specialist</h1>
+      <p class="lead">You keep a product working day to day. When something fails, you find where it broke, then fix it or hand it to the right team.</p>
+
+      <figure class="figure" data-fig="roleMap">
+        <figcaption>Your job: find where in this chain something broke.</figcaption>
+      </figure>
+
+      <div class="block">
+        <h2>How each session works</h2>
+        <figure class="figure" data-fig="howItWorks"></figure>
+      </div>
+
+      <div class="block">
+        <h2>Sessions</h2>
+        <div class="cards">
+          <a class="card" href="#session-0">
+            <div class="card-top"><span class="card-num">Session 0</span></div>
+            <h3>How the Internet Works</h3>
+            <p>Explain how a profile reaches your phone.</p>
+          </a>
+          <a class="card" href="#session-1">
+            <div class="card-top"><span class="card-num">Session 1</span><span class="tag amber">Highest priority</span></div>
+            <h3>REST APIs and Postman</h3>
+            <p>Call an API and fix a failing request.</p>
+          </a>
+          <a class="card" href="#session-2">
+            <div class="card-top"><span class="card-num">Session 2</span><span class="tag amber">Highest priority</span></div>
+            <h3>SQL and Databases</h3>
+            <p>Query customers, orders, payments and revenue.</p>
+          </a>
+          <a class="card" href="#session-3">
+            <div class="card-top"><span class="card-num">Session 3</span></div>
+            <h3>API Integrations and Webhooks</h3>
+            <p>Explain how a payment event reaches your backend only once.</p>
+          </a>
+          <a class="card" href="#session-4">
+            <div class="card-top"><span class="card-num">Session 4</span></div>
+            <h3>Debugging and Troubleshooting</h3>
+            <p>Investigate an HTTP 500 step by step.</p>
+          </a>
+          <a class="card" href="#session-5">
+            <div class="card-top"><span class="card-num">Session 5</span></div>
+            <h3>Security and Data Handling</h3>
+            <p>Keep one customer's records away from everyone else.</p>
+          </a>
+          <a class="card" href="#session-6">
+            <div class="card-top"><span class="card-num">Session 6</span></div>
+            <h3>Git, Linux and Basic Tooling</h3>
+            <p>Trace a production issue from a log line to a query.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 0 ===================== -->
+    <section class="page" id="session-0" data-title="How the Internet Works" data-number="0" hidden>
+      <p class="eyebrow">Session 0</p>
+      <h1 class="display">How the Internet Works</h1>
+      <p class="lead">Everything in this guide runs on the internet. Here it is, one picture at a time.</p>
+
+      <div class="block">
+        <h2><span class="n">1</span>What is the internet?</h2>
+        <p class="line">A <strong>global system for passing data from one place to another.</strong> It is real equipment: cables, routers and servers.</p>
+        <figure class="figure">
+          <div class="shot md"><img src="images/internet.png" alt="Hand-drawn picture of laptops, phones, routers, towers and servers joined by a tangle of cables"></div>
+        </figure>
+        <figure class="figure" data-fig="journey">
+          <figcaption>Wireless is only the last few metres. The rest of the journey is on cables.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">2</span>Rules and packets</h2>
+        <p class="line">Millions of different devices share one set of rules, <strong>TCP/IP</strong>. Big files travel as small <strong>packets</strong>.</p>
+        <figure class="figure" data-fig="rules"></figure>
+        <figure class="figure" data-fig="packets">
+          <figcaption>A photo or video is not sent in one piece.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">3</span>Client and server</h2>
+        <p class="line">The <strong>client</strong> asks. The <strong>server</strong> answers. Anyone with a device and a connection can reach a server.</p>
+        <figure class="figure">
+          <div class="shot sm"><img src="images/client-server.png" alt="Three clients (laptop, phone, desktop) connected through the internet to one server"></div>
+        </figure>
+        <figure class="figure" data-fig="clientServer"></figure>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">4</span>Frontend and backend</h2>
+        <p class="line">Every product has two parts: what you see, and what works behind it.</p>
+        <figure class="figure">
+          <div class="shot md"><img src="images/frontend-backend.webp" alt="Frontend and backend: the customer on one side, and the web server, application server and database on the other"></div>
+        </figure>
+        <figure class="figure" data-fig="split">
+          <figcaption>On Instagram, photos and the Like button are the frontend. Saving the like is the backend.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">5</span>API</h2>
+        <p class="line">The frontend and backend are far apart. The <strong>API</strong> lets them talk.</p>
+        <figure class="figure">
+          <div class="shot md"><img src="images/api.png" data-fallback="https://www.akamai.com/site/en/images/article/2023/how-a-web-api-works.png" alt="How a web API passes a request and a response between two applications" referrerpolicy="no-referrer"></div>
+        </figure>
+        <figure class="figure" data-fig="api">
+          <figcaption>Tap Like: the request goes in, the response comes back.</figcaption>
+        </figure>
+        <p class="line">You will use APIs hands-on in <a href="#session-1">Session 1</a>.</p>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">6</span>JSON</h2>
+        <p class="line">APIs send data as <strong>JSON</strong>: plain text that people and programs can both read.</p>
+        <div class="compare">
+          <div class="compare-col">
+            <div class="fig-label">What the user sees</div>
+            <div class="profile">
+              <div class="profile-top">
+                <div class="avatar">M</div>
+                <div><div class="uname">travel_with_maya</div><div class="full">Maya Patel</div></div>
+              </div>
+              <p class="bio">Travel | Food | Photography</p>
+              <div class="pstats">
+                <div><b>248</b><span>posts</span></div>
+                <div><b>15,200</b><span>followers</span></div>
+                <div><b>310</b><span>following</span></div>
+              </div>
+              <div class="ptiles">
+                <div class="ptile"><b>Sunset in Goa</b>532 likes</div>
+                <div class="ptile"><b>Street food in Mumbai</b>410 likes</div>
+              </div>
+            </div>
+          </div>
+          <div class="compare-col">
+            <div class="fig-label">What the API sends</div>
+            <div class="code">
+              <div class="code-bar">GET /users/travel_with_maya</div>
+<pre><code data-json>{
+  "username": "travel_with_maya",
+  "full_name": "Maya Patel",
+  "bio": "Travel | Food | Photography",
+  "is_verified": false,
+  "posts_count": 248,
+  "followers_count": 15200,
+  "following_count": 310,
+  "recent_posts": [
+    {
+      "id": 101,
+      "caption": "Sunset in Goa",
+      "likes": 532
+    },
+    {
+      "id": 102,
+      "caption": "Street food in Mumbai",
+      "likes": 410
+    }
+  ]
+}</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="legend">
+          <div><code class="tk-v">"username"</code><span>The name of the data (key)</span></div>
+          <div><code class="tk-s">"Maya Patel"</code><span>Text, always in quotes</span></div>
+          <div><code class="tk-n">15200</code><span>Number, no quotes</span></div>
+          <div><code class="tk-st">false</code><span>true or false</span></div>
+          <div><code>{ }</code><span>One object: a group of keys</span></div>
+          <div><code>[ ]</code><span>A list of items</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">7</span>HTTP and HTTPS</h2>
+        <p class="line"><strong>HTTP</strong> is the set of rules for a request and a response. <strong>HTTPS</strong> is HTTP with encryption.</p>
+        <figure class="figure" data-fig="https"></figure>
+        <div class="callout amber">
+          <div class="callout-title">Remember</div>
+          <p>Always use HTTPS, especially for logins, payments and API keys.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>The full picture</h2>
+        <figure class="figure" data-fig="fullPicture">
+          <figcaption>Opening a profile: the request goes right, the JSON response comes back, all over HTTPS.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber">
+          <p>In your own words, explain what happens from the moment you open an Instagram profile on your phone until the profile appears. Use these words: client, server, frontend, backend, API, JSON, HTTPS.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 1 ===================== -->
+    <section class="page" id="session-1" data-title="REST APIs and Postman" data-number="1" hidden>
+      <p class="eyebrow">Session 1 <span class="tag amber">Highest priority</span></p>
+      <h1 class="display">REST APIs and Postman</h1>
+      <p class="lead">Almost every system you support talks through APIs. Learn to build a request, read the response, and find out why one fails.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>HTTP methods: GET, POST, PUT, PATCH, DELETE</li>
+          <li>Status codes: 200, 201, 400, 401, 403, 404, 500</li>
+          <li>Headers, request body, query parameters and path parameters</li>
+          <li>Authentication: API keys, Bearer tokens, JWT</li>
+          <li>JSON responses, pagination, filtering and sorting</li>
+          <li>Rate limits, timeouts, retries and API error handling</li>
+          <li>Testing endpoints using Postman</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>Call an API, inspect the response, identify why a request fails, and explain the fix.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 2 ===================== -->
+    <section class="page" id="session-2" data-title="SQL and Databases" data-number="2" hidden>
+      <p class="eyebrow">Session 2 <span class="tag amber">Highest priority</span></p>
+      <h1 class="display">SQL and Databases</h1>
+      <p class="lead">Application data lives in databases. Learn to ask it questions, such as which orders have no payment, safely.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>SELECT, WHERE, ORDER BY, LIMIT</li>
+          <li>GROUP BY, HAVING, aggregate functions</li>
+          <li>INNER JOIN, LEFT JOIN and multiple-table joins</li>
+          <li>Subqueries and Common Table Expressions (CTEs)</li>
+          <li>INSERT, UPDATE, DELETE</li>
+          <li>Primary keys, foreign keys and constraints</li>
+          <li>NULL handling and duplicate records</li>
+          <li>Indexes, query performance and EXPLAIN ANALYZE</li>
+          <li>Transactions and ACID basics</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>Write queries that combine customers, orders, payments and monthly revenue.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 3 ===================== -->
+    <section class="page" id="session-3" data-title="API Integrations and Webhooks" data-number="3" hidden>
+      <p class="eyebrow">Session 3</p>
+      <h1 class="display">API Integrations and Webhooks</h1>
+      <p class="lead">Products are made of several applications that exchange data. Learn how that exchange works and what happens when it fails.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>How two different applications exchange data</li>
+          <li>API request and response lifecycle</li>
+          <li>Webhooks versus polling</li>
+          <li>JSON payload validation</li>
+          <li>Pagination when fetching large datasets</li>
+          <li>Duplicate requests and idempotency</li>
+          <li>Retry logic and handling failed integrations</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>Explain how a payment provider notifies your backend that a payment succeeded, and how you prevent processing the same event twice.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 4 ===================== -->
+    <section class="page" id="session-4" data-title="Debugging and Troubleshooting" data-number="4" hidden>
+      <p class="eyebrow">Session 4</p>
+      <h1 class="display">Debugging and Troubleshooting</h1>
+      <p class="lead">When something breaks, find where it broke before you change anything. Collect evidence, then act.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>Reading application logs and stack traces</li>
+          <li>HTTP errors versus database errors</li>
+          <li>Reproducing bugs using Postman</li>
+          <li>Checking request IDs, timestamps and payloads</li>
+          <li>Understanding timeouts and slow queries</li>
+          <li>Separating frontend, backend and third-party API issues</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>An endpoint returns HTTP 500. Explain how you would investigate it step by step instead of immediately changing code.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 5 ===================== -->
+    <section class="page" id="session-5" data-title="Security and Data Handling" data-number="5" hidden>
+      <p class="eyebrow">Session 5</p>
+      <h1 class="display">Security and Data Handling</h1>
+      <p class="lead">You will have access to customer data. Learn who may do what, and how to keep secrets and personal data safe.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>Authentication versus authorization</li>
+          <li>SQL injection and parameterized queries</li>
+          <li>API key and secret management</li>
+          <li>Input validation</li>
+          <li>Role-based access control</li>
+          <li>Personally identifiable information and safe logging</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>Explain how you would prevent an unauthorized user from accessing another customer's records.</p></div>
+      </div>
+    </section>
+
+    <!-- ===================== SESSION 6 ===================== -->
+    <section class="page" id="session-6" data-title="Git, Linux and Basic Tooling" data-number="6" hidden>
+      <p class="eyebrow">Session 6</p>
+      <h1 class="display">Git, Linux and Basic Tooling</h1>
+      <p class="lead">Production issues are investigated from a terminal and a code repository. Learn the basics you need there.</p>
+
+      <div class="block">
+        <h2>What you will learn</h2>
+        <ul class="topics">
+          <li>Git branches, commits, merge conflicts and pull requests</li>
+          <li>Environment variables and configuration</li>
+          <li>Basic Linux commands: cd, ls, grep, tail</li>
+          <li>Reading logs and checking running processes</li>
+          <li>Environment differences between development and production</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Practice</h2>
+        <div class="callout amber"><p>Trace a production issue from a log entry to the relevant endpoint and database query.</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/illustrations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
