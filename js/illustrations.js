@@ -126,24 +126,153 @@
   }
 
   /* Frontend on one side, backend on the other. */
+  /* Two side-by-side panels. Each side: { c, title, sub, items: [] }. a.arrow === false hides the middle arrow. */
+  function panels(L, R, o = {}) {
+    const id = 'ar' + ++uid;
+    let out = marker(id);
+    const n = Math.max(L.items.length, R.items.length);
+    const h = 116 + (n - 1) * 40;
+    const panel = (x, p) => {
+      const [f, s] = COLORS[p.c || ''];
+      let r = `<rect x="${x}" y="8" width="326" height="${h}" rx="16" fill="${f}" stroke="${s}" stroke-width="1.5"/>`;
+      r += text(x + 24, 38, p.title, { anchor: 'start', size: 14 });
+      if (p.sub) r += text(x + 24, 56, p.sub, { anchor: 'start', size: 11.5, weight: 400, fill: '#6b6b6b' });
+      p.items.forEach((t, i) => {
+        r += `<rect x="${x + 24}" y="${76 + i * 40}" width="278" height="32" rx="10" fill="#fff" stroke="${s}" stroke-width="1.2"/>`;
+        r += text(x + 40, 97 + i * 40, t, { anchor: 'start', size: 13, weight: 500 });
+      });
+      return r;
+    };
+    out += panel(8, L) + panel(386, R);
+    if (o.arrow !== false) out += `<line x1="342" y1="${8 + h / 2}" x2="378" y2="${8 + h / 2}" stroke="#0d0d0d" stroke-width="1.6" marker-start="url(#${id})" marker-end="url(#${id})"/>`;
+    return svg(720, h + 16, out, `${L.title} and ${R.title}`);
+  }
+
   function split() {
+    return panels(
+      { c: 'green', title: 'FRONTEND', sub: 'What the user sees and touches', items: ['Pages', 'Buttons', 'Images'] },
+      { c: 'amber', title: 'BACKEND', sub: 'What works behind the scenes', items: ['Stores data', 'Checks logins', 'Handles payments'] }
+    );
+  }
+
+  /* A URL split into colour-coded parts, with a key underneath. */
+  function urlParts() {
+    const CW = 9, X0 = 20, Y = 34;
+    const segs = [
+      ['https://', 'Protocol', '#6b6b6b'],
+      ['api.example.com', 'Host: the server', '#6b6b6b'],
+      ['/orders', 'Path: the resource', '#0d0d0d'],
+      ['/123', 'Path parameter: which one', '#1e7a4c'],
+      ['?status=paid&limit=10', 'Query parameters: how to filter', '#b8741a'],
+    ];
+    let o = '', x = X0;
+    segs.forEach(([s, , c]) => {
+      o += `<text x="${x}" y="${Y}" font-size="15" font-weight="600" fill="${c}" ${MONO} textLength="${s.length * CW}" lengthAdjust="spacingAndGlyphs">${X(s)}</text>`;
+      o += `<rect x="${x}" y="${Y + 8}" width="${s.length * CW - 2}" height="3" rx="1.5" fill="${c}"/>`;
+      x += s.length * CW;
+    });
+    segs.forEach(([s, label, c], i) => {
+      const y = 82 + i * 28;
+      o += `<circle cx="28" cy="${y - 4}" r="5" fill="${c}"/>`;
+      o += text(44, y, s, { anchor: 'start', size: 12.5, mono: true, weight: 500 });
+      o += text(250, y, label, { anchor: 'start', size: 13, weight: 500, fill: '#2b2b2b' });
+    });
+    return svg(560, 218, o, 'A URL split into protocol, host, path, path parameter and query parameters');
+  }
+
+  /* Retry waits that double each time. */
+  function backoff() {
+    let o = `<line x1="30" y1="150" x2="500" y2="150" stroke="#9b9b9b" stroke-width="1.5"/>`;
+    [[60, 20, 'Wait 1s', 'Retry 1'], [170, 40, 'Wait 2s', 'Retry 2'], [280, 80, 'Wait 4s', 'Retry 3'], [390, 140, 'Wait 8s', 'Retry 4']].forEach(([x, h, l, r]) => {
+      o += `<rect x="${x}" y="${150 - h}" width="70" height="${h}" rx="8" fill="#fbf0db" stroke="#b8741a" stroke-width="1.4"/>`;
+      o += text(x + 35, 170, l, { size: 12.5 });
+      o += text(x + 35, 150 - h - 8, r, { size: 11.5, weight: 500, fill: '#6b6b6b' });
+    });
+    return svg(530, 184, o, 'Exponential backoff: wait 1, 2, 4 and 8 seconds between retries');
+  }
+
+  /* The server did the work, but the reply never arrived. */
+  function lostResponse() {
     const id = 'ar' + ++uid;
     let o = marker(id);
-    const panel = (x, c, title, sub, items) => {
+    o += box(8, 14, 120, 112, { t: 'Client', s: 'Sees a timeout', c: 'gray' });
+    o += box(392, 14, 120, 112, { t: 'Server', s: 'Payment created', c: 'amber' });
+    o += text(260, 44, 'Request: create a payment', { weight: 500 });
+    o += `<line x1="136" y1="52" x2="384" y2="52" stroke="#0d0d0d" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    o += `<line x1="384" y1="96" x2="136" y2="96" stroke="#b8741a" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#${id})"/>`;
+    o += `<circle cx="260" cy="96" r="10" fill="#fbf0db" stroke="#b8741a" stroke-width="1.5"/><path d="M256 92 l8 8 M264 92 l-8 8" stroke="#b8741a" stroke-width="1.8" stroke-linecap="round"/>`;
+    o += text(260, 124, 'Response lost on the way', { weight: 500, fill: '#85500f' });
+    return svg(520, 142, o, 'The server created the payment but the response was lost, so the client sees a timeout');
+  }
+
+  /* Polling: keep asking. Webhook: get told. */
+  function webhookVsPolling() {
+    const id = 'ar' + ++uid;
+    let o = marker(id);
+    const tag = (y, t, c) => {
       const [f, s] = COLORS[c];
-      let p = `<rect x="${x}" y="8" width="326" height="196" rx="16" fill="${f}" stroke="${s}" stroke-width="1.5"/>`;
-      p += text(x + 24, 38, title, { anchor: 'start', size: 14 });
-      p += text(x + 24, 56, sub, { anchor: 'start', size: 11.5, weight: 400, fill: '#6b6b6b' });
-      items.forEach((t, i) => {
-        p += `<rect x="${x + 24}" y="${76 + i * 40}" width="278" height="32" rx="10" fill="#fff" stroke="${s}" stroke-width="1.2"/>`;
-        p += text(x + 40, 97 + i * 40, t, { anchor: 'start', size: 13, weight: 500 });
-      });
-      return p;
+      return `<rect x="8" y="${y}" width="130" height="24" rx="12" fill="${f}" stroke="${s}" stroke-width="1.2"/>` + text(73, y + 16, t);
     };
-    o += panel(8, 'green', 'FRONTEND', 'What the user sees and touches', ['Pages', 'Buttons', 'Images']);
-    o += panel(386, 'amber', 'BACKEND', 'What works behind the scenes', ['Stores data', 'Checks logins', 'Handles payments']);
-    o += `<line x1="342" y1="106" x2="378" y2="106" stroke="#0d0d0d" stroke-width="1.6" marker-start="url(#${id})" marker-end="url(#${id})"/>`;
-    return svg(720, 212, o, 'Frontend: pages, buttons, images. Backend: stores data, checks logins, handles payments');
+    // Row 1: polling
+    o += tag(8, 'Polling', 'gray');
+    o += box(8, 44, 112, 64, { t: 'Your app', c: 'green' }) + box(508, 44, 112, 64, { t: 'Provider', c: 'amber' });
+    o += text(314, 62, 'Any news?', { weight: 500 });
+    o += `<line x1="128" y1="70" x2="500" y2="70" stroke="#0d0d0d" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    o += text(314, 104, 'Not yet... ask again in a few seconds', { weight: 500, fill: '#6b6b6b' });
+    o += `<line x1="500" y1="84" x2="128" y2="84" stroke="#6b6b6b" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#${id})"/>`;
+    // Row 2: webhook
+    o += tag(136, 'Webhook', 'green');
+    o += box(8, 172, 112, 64, { t: 'Provider', c: 'amber' }) + box(508, 172, 112, 64, { t: 'Your app', c: 'green' });
+    o += text(314, 192, 'Event: payment.succeeded', { weight: 500, mono: true, size: 12 });
+    o += `<line x1="128" y1="204" x2="500" y2="204" stroke="#1e7a4c" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    o += text(314, 226, 'The provider calls you when it happens', { weight: 500, fill: '#135238' });
+    return svg(628, 246, o, 'Polling means your app keeps asking. A webhook means the provider tells your app when something happens.');
+  }
+
+  /* Same idempotency key: the retry does not create a second payment. */
+  function idempotency() {
+    const id = 'ar' + ++uid;
+    let o = marker(id);
+    o += box(8, 14, 112, 196, { t: 'Your server', s: 'Sends requests', c: 'green' });
+    o += box(520, 14, 112, 196, { t: 'Stripe', s: 'Creates payments', c: 'amber' });
+    // first attempt
+    o += text(320, 44, 'POST /v1/payment_intents', { weight: 600, mono: true, size: 12 });
+    o += text(320, 60, 'Idempotency-Key: abc123', { weight: 500, mono: true, size: 11.5, fill: '#6b6b6b' });
+    o += `<line x1="128" y1="68" x2="512" y2="68" stroke="#0d0d0d" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    o += `<line x1="512" y1="90" x2="128" y2="90" stroke="#1e7a4c" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#${id})"/>`;
+    o += text(320, 108, 'New payment created', { weight: 500, fill: '#135238' });
+    // retry
+    o += `<line x1="150" y1="124" x2="490" y2="124" stroke="#dcdcdc" stroke-width="1" stroke-dasharray="2 4"/>`;
+    o += text(320, 142, 'Retry after a timeout', { weight: 600 });
+    o += text(320, 158, 'Idempotency-Key: abc123 (same key)', { weight: 500, mono: true, size: 11.5, fill: '#6b6b6b' });
+    o += `<line x1="128" y1="166" x2="512" y2="166" stroke="#0d0d0d" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    o += `<line x1="512" y1="188" x2="128" y2="188" stroke="#1e7a4c" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#${id})"/>`;
+    o += text(320, 206, 'Same result. No second charge.', { weight: 600, fill: '#135238' });
+    return svg(640, 224, o, 'A retry with the same idempotency key returns the same result and does not create a second payment');
+  }
+
+  /* PaymentIntent statuses. */
+  function intentLifecycle() {
+    const id = 'ar' + ++uid;
+    let o = marker(id);
+    const W = 148, G = 24, H = 64;
+    const main = [
+      { t: 'Created', s: 'requires_payment_method' },
+      { t: 'Method added', s: 'requires_confirmation' },
+      { t: 'Extra step', s: 'requires_action', c: 'amber' },
+      { t: 'Processing', s: 'processing' },
+      { t: 'Paid', s: 'succeeded', c: 'green' },
+    ];
+    main.forEach((n, i) => {
+      const x = 8 + i * (W + G);
+      o += box(x, 8, W, H, n);
+      if (i < main.length - 1) o += `<line x1="${x + W + 3}" y1="${8 + H / 2}" x2="${x + W + G - 3}" y2="${8 + H / 2}" stroke="#0d0d0d" stroke-width="1.6" marker-end="url(#${id})"/>`;
+    });
+    o += text(8, 112, 'Also possible', { anchor: 'start', size: 12, fill: '#6b6b6b' });
+    o += box(8, 124, 240, 56, { t: 'requires_capture', s: 'Authorized, money not taken yet', c: 'amber' });
+    o += box(268, 124, 240, 56, { t: 'Payment fails', s: 'Back to requires_payment_method', c: 'amber' });
+    o += box(528, 124, 240, 56, { t: 'canceled', s: 'Stopped before success', c: 'gray' });
+    return svg(852, 190, o, 'PaymentIntent statuses from requires_payment_method to succeeded, plus requires_capture, failure and canceled');
   }
 
   /* HTTP sends readable text, HTTPS sends scrambled text. */
@@ -181,7 +310,18 @@
       { t: 'Backend', s: 'Logic and logins', c: 'amber' },
       { t: 'Database', s: 'Stored data', c: 'gray' },
     ], { bidir: true, w: 150, gap: 44, label: 'Customer app, API, backend and database' }),
-    howItWorks: () => flow([{ t: 'Introduction' }, { t: 'What you will learn' }, { t: 'Practice', c: 'amber' }], { w: 170, gap: 44 }),
+    howItWorks: () => flow([{ t: 'Read the sections' }, { t: 'Present them' }, { t: 'Try the tasks', c: 'amber' }], { w: 190, gap: 44 }),
+
+    /* Generic figures. Use data-args='{...}' to pass the options. */
+    flow: (a) => flow(a.items, a.opts || {}),
+    duplex: (a) => duplex(a.left, a.right, a.req, a.res),
+    panels: (a) => panels(a.left, a.right, a),
+    urlParts,
+    backoff,
+    lostResponse,
+    webhookVsPolling,
+    idempotency,
+    intentLifecycle,
     journey,
     rules,
     packets,
@@ -201,5 +341,6 @@
     ], { bidir: true, w: 160, gap: 44, label: 'Phone, API, backend and database' }),
   };
 
-  window.Ops = { fig };
+  window.Ops = window.Ops || {};
+  Ops.fig = fig;
 })();

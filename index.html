@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/modules.css">
 </head>
 <body>
 
@@ -43,7 +44,9 @@
 
       <div class="block">
         <h2>How each session works</h2>
-        <figure class="figure" data-fig="howItWorks"></figure>
+        <figure class="figure" data-fig="howItWorks">
+          <figcaption>Each session is split into sections. Present them, then try the tasks and open the solutions.</figcaption>
+        </figure>
       </div>
 
       <div class="block">
@@ -60,27 +63,32 @@
             <p>Call an API and fix a failing request.</p>
           </a>
           <a class="card" href="#session-2">
-            <div class="card-top"><span class="card-num">Session 2</span><span class="tag amber">Highest priority</span></div>
+            <div class="card-top"><span class="card-num">Session 2</span></div>
+            <h3>Stripe</h3>
+            <p>Explain how a payment works and investigate when it fails.</p>
+          </a>
+          <a class="card" href="#session-3">
+            <div class="card-top"><span class="card-num">Session 3</span><span class="tag amber">Highest priority</span></div>
             <h3>SQL and Databases</h3>
             <p>Query customers, orders, payments and revenue.</p>
           </a>
-          <a class="card" href="#session-3">
-            <div class="card-top"><span class="card-num">Session 3</span></div>
+          <a class="card" href="#session-4">
+            <div class="card-top"><span class="card-num">Session 4</span></div>
             <h3>API Integrations and Webhooks</h3>
             <p>Explain how a payment event reaches your backend only once.</p>
           </a>
-          <a class="card" href="#session-4">
-            <div class="card-top"><span class="card-num">Session 4</span></div>
+          <a class="card" href="#session-5">
+            <div class="card-top"><span class="card-num">Session 5</span></div>
             <h3>Debugging and Troubleshooting</h3>
             <p>Investigate an HTTP 500 step by step.</p>
           </a>
-          <a class="card" href="#session-5">
-            <div class="card-top"><span class="card-num">Session 5</span></div>
+          <a class="card" href="#session-6">
+            <div class="card-top"><span class="card-num">Session 6</span></div>
             <h3>Security and Data Handling</h3>
             <p>Keep one customer's records away from everyone else.</p>
           </a>
-          <a class="card" href="#session-6">
-            <div class="card-top"><span class="card-num">Session 6</span></div>
+          <a class="card" href="#session-7">
+            <div class="card-top"><span class="card-num">Session 7</span></div>
             <h3>Git, Linux and Basic Tooling</h3>
             <p>Trace a production issue from a log line to a query.</p>
           </a>
@@ -232,34 +240,15 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 1 ===================== -->
-    <section class="page" id="session-1" data-title="REST APIs and Postman" data-number="1" hidden>
-      <p class="eyebrow">Session 1 <span class="tag amber">Highest priority</span></p>
-      <h1 class="display">REST APIs and Postman</h1>
-      <p class="lead">Almost every system you support talks through APIs. Learn to build a request, read the response, and find out why one fails.</p>
+    <!-- ===================== SESSION 1: REST APIs (js/content/session-1.js) ===================== -->
+    <div data-include="session-1"></div>
 
-      <div class="block">
-        <h2>What you will learn</h2>
-        <ul class="topics">
-          <li>HTTP methods: GET, POST, PUT, PATCH, DELETE</li>
-          <li>Status codes: 200, 201, 400, 401, 403, 404, 500</li>
-          <li>Headers, request body, query parameters and path parameters</li>
-          <li>Authentication: API keys, Bearer tokens, JWT</li>
-          <li>JSON responses, pagination, filtering and sorting</li>
-          <li>Rate limits, timeouts, retries and API error handling</li>
-          <li>Testing endpoints using Postman</li>
-        </ul>
-      </div>
+    <!-- ===================== SESSION 2: Stripe (js/content/stripe.js) ===================== -->
+    <div data-include="stripe"></div>
 
-      <div class="block">
-        <h2>Practice</h2>
-        <div class="callout amber"><p>Call an API, inspect the response, identify why a request fails, and explain the fix.</p></div>
-      </div>
-    </section>
-
-    <!-- ===================== SESSION 2 ===================== -->
-    <section class="page" id="session-2" data-title="SQL and Databases" data-number="2" hidden>
-      <p class="eyebrow">Session 2 <span class="tag amber">Highest priority</span></p>
+    <!-- ===================== SESSION 3 ===================== -->
+    <section class="page" id="session-3" data-title="SQL and Databases" data-number="3" hidden>
+      <p class="eyebrow">Session 3 <span class="tag amber">Highest priority</span></p>
       <h1 class="display">SQL and Databases</h1>
       <p class="lead">Application data lives in databases. Learn to ask it questions, such as which orders have no payment, safely.</p>
 
@@ -284,9 +273,9 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 3 ===================== -->
-    <section class="page" id="session-3" data-title="API Integrations and Webhooks" data-number="3" hidden>
-      <p class="eyebrow">Session 3</p>
+    <!-- ===================== SESSION 4 ===================== -->
+    <section class="page" id="session-4" data-title="API Integrations and Webhooks" data-number="4" hidden>
+      <p class="eyebrow">Session 4</p>
       <h1 class="display">API Integrations and Webhooks</h1>
       <p class="lead">Products are made of several applications that exchange data. Learn how that exchange works and what happens when it fails.</p>
 
@@ -309,9 +298,9 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 4 ===================== -->
-    <section class="page" id="session-4" data-title="Debugging and Troubleshooting" data-number="4" hidden>
-      <p class="eyebrow">Session 4</p>
+    <!-- ===================== SESSION 5 ===================== -->
+    <section class="page" id="session-5" data-title="Debugging and Troubleshooting" data-number="5" hidden>
+      <p class="eyebrow">Session 5</p>
       <h1 class="display">Debugging and Troubleshooting</h1>
       <p class="lead">When something breaks, find where it broke before you change anything. Collect evidence, then act.</p>
 
@@ -333,9 +322,9 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 5 ===================== -->
-    <section class="page" id="session-5" data-title="Security and Data Handling" data-number="5" hidden>
-      <p class="eyebrow">Session 5</p>
+    <!-- ===================== SESSION 6 ===================== -->
+    <section class="page" id="session-6" data-title="Security and Data Handling" data-number="6" hidden>
+      <p class="eyebrow">Session 6</p>
       <h1 class="display">Security and Data Handling</h1>
       <p class="lead">You will have access to customer data. Learn who may do what, and how to keep secrets and personal data safe.</p>
 
@@ -357,9 +346,9 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 6 ===================== -->
-    <section class="page" id="session-6" data-title="Git, Linux and Basic Tooling" data-number="6" hidden>
-      <p class="eyebrow">Session 6</p>
+    <!-- ===================== SESSION 7 ===================== -->
+    <section class="page" id="session-7" data-title="Git, Linux and Basic Tooling" data-number="7" hidden>
+      <p class="eyebrow">Session 7</p>
       <h1 class="display">Git, Linux and Basic Tooling</h1>
       <p class="lead">Production issues are investigated from a terminal and a code repository. Learn the basics you need there.</p>
 
@@ -382,7 +371,18 @@
 
   </main>
 
+  <div class="pres-bar" id="pres-bar" hidden>
+    <button type="button" class="pres-exit" id="pres-exit">Exit</button>
+    <span class="pres-title" id="pres-title"></span>
+    <span class="pres-count" id="pres-count"></span>
+    <button type="button" class="pres-nav" id="pres-prev" aria-label="Previous slide"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
+    <button type="button" class="pres-nav" id="pres-next" aria-label="Next slide"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
+  </div>
+
   <script src="js/illustrations.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/content/session-1.js"></script>
+  <script src="js/content/stripe.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
