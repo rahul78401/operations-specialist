@@ -52,6 +52,29 @@
     );
   });
 
+  /* Colour SQL blocks: comments, strings, keywords, numbers, functions */
+  const SQL_TOKEN = new RegExp([
+    /(--[^\n]*)/.source,
+    /('(?:''|[^'])*')/.source,
+    /\b(SELECT|DISTINCT|FROM|WHERE|GROUP BY|HAVING|ORDER BY|LIMIT|OFFSET|AS|ASC|DESC|NOT EXISTS|EXISTS|AND|OR|NOT|IN|BETWEEN|LIKE|ILIKE|IS NOT NULL|IS NULL|NULL|INSERT INTO|VALUES|UPDATE|SET TRANSACTION ISOLATION LEVEL|SET|DELETE FROM|LEFT JOIN|RIGHT JOIN|FULL JOIN|INNER JOIN|CROSS JOIN|JOIN|ON DELETE CASCADE|ON DELETE SET NULL|ON|DEFAULT|PRIMARY KEY|FOREIGN KEY|REFERENCES|UNIQUE|CHECK|CONSTRAINT|CREATE UNIQUE INDEX|CREATE INDEX|CREATE TABLE|ALTER TABLE|DROP TABLE|USING|EXPLAIN ANALYZE|EXPLAIN|WITH RECURSIVE|WITH|CASE|WHEN|THEN|ELSE|END|OVER|PARTITION BY|UNION ALL|UNION|INTERSECT|EXCEPT|FOR UPDATE|BEGIN|COMMIT|ROLLBACK|BIGINT|INTEGER|INT|VARCHAR|TEXT|TIMESTAMP|BOOLEAN|DECIMAL|NUMERIC|GENERATED ALWAYS AS IDENTITY)\b/.source,
+    /\b(\d+(?:\.\d+)?)\b/.source,
+    /([A-Za-z_]\w*)(?=\()/.source,
+  ].join('|'), 'gi');
+  const SQL_CLS = ['', 'tk-c', 'tk-s', 'tk-ctl', 'tk-n', 'tk-f'];
+  document.querySelectorAll('code[data-sql]').forEach((el) => {
+    const text = el.textContent;
+    let out = '', last = 0, m;
+    SQL_TOKEN.lastIndex = 0;
+    while ((m = SQL_TOKEN.exec(text))) {
+      out += esc(text.slice(last, m.index));
+      let k = 1;
+      while (k < m.length && m[k] === undefined) k++;
+      out += `<span class="${SQL_CLS[k]}">${esc(m[0])}</span>`;
+      last = m.index + m[0].length;
+    }
+    el.innerHTML = out + esc(text.slice(last));
+  });
+
   /* Everything before the first block is the page head (title slide). Add a Present button to it. */
   const playIcon = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 1.5v11l9-5.5z"/></svg>';
   pages.forEach((page) => {
