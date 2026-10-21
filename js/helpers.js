@@ -44,26 +44,29 @@
 
   const page = (o, blocks) => {
     const eyebrow = o.parent
-      ? `<a href="#${o.parent}">${o.parentTitle}</a><span class="sep">/</span>${o.num}`
+      ? `<a href="#${o.parent}">${o.parentTitle}</a><span class="sep">/</span>${o.under ? `<a href="#${o.under}">${o.underTitle}</a><span class="sep">/</span>` : ''}${o.num}`
       : `${o.label}${o.tag || ''}`;
-    return `<section class="page" id="${o.id}" data-title="${esc(o.title)}" ${o.parent ? `data-parent="${o.parent}" data-sub="${o.num}"` : `data-number="${o.num}"`} hidden>` +
-      `<p class="eyebrow">${eyebrow}</p><h1 class="display">${o.title}</h1>${o.lead ? `<p class="lead">${o.lead}</p>` : ''}${blocks.join('')}</section>`;
+    return `<section class="page" id="${o.id}" data-title="${esc(o.title)}" ${o.parent ? `data-parent="${o.parent}" data-sub="${o.num}"${o.under ? ` data-under="${o.under}"` : ''}` : `data-number="${o.num}"`} hidden>` +
+      `<p class="eyebrow">${eyebrow}</p><h1 class="display">${o.title}</h1>${o.lead ? `<p class="lead">${o.lead}</p>` : ''}${o.head || ''}${blocks.join('')}</section>`;
   };
 
   /* A whole module: landing page (what you will learn + section cards) and one page per section.
      spec: { id, prefix, num, title, lead, tag, learn: [], subs: [{ key, title, lead, blocks: [] }], extra: [] } */
   const module = (spec) => {
     const subId = (s) => `${spec.prefix}-${s.key}`;
-    const cards = spec.subs.map((s, i) =>
-      `<a class="card" href="#${subId(s)}"><div class="card-top"><span class="card-num">${spec.num}.${i + 1}</span></div><h3>${s.title}</h3><p>${s.lead}</p></a>`
+    /* Sections numbered 1, 2, 3...; a nested section (noCard) gets its own number */
+    let n = 0;
+    const nums = spec.subs.map((s) => (s.noCard ? s.num : `${spec.num}.${++n}`));
+    const cards = spec.subs.map((s, i) => s.noCard ? '' :
+      `<a class="card" href="#${subId(s)}"><div class="card-top"><span class="card-num">${nums[i]}</span></div><h3>${s.title}</h3><p>${s.lead}</p></a>`
     ).join('');
     const landing = page({ id: spec.id, num: spec.num, title: spec.title, lead: spec.lead, label: `Session ${spec.num} `, tag: spec.tag }, [
-      block('What you will learn', '', list(spec.learn)),
+      ...(spec.learn ? [block('What you will learn', '', list(spec.learn))] : []),
       block('Sections', '', `<div class="cards">${cards}</div>`),
       ...(spec.extra || []),
     ]);
     const subs = spec.subs.map((s, i) =>
-      page({ id: subId(s), parent: spec.id, parentTitle: spec.title, num: `${spec.num}.${i + 1}`, title: s.title, lead: s.lead }, s.blocks)
+      page({ id: subId(s), parent: spec.id, parentTitle: spec.title, num: nums[i], title: s.title, lead: s.lead, head: s.head, under: s.under && `${spec.prefix}-${s.under}`, underTitle: s.under && spec.subs.find((x) => x.key === s.under).title }, s.blocks)
     );
     return [landing, ...subs].join('\n');
   };

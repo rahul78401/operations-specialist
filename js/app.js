@@ -107,7 +107,7 @@
       `<div class="nav-mod" data-mod="${page.id}"><div class="nav-mod-row">` +
       `<a class="nav-link nav-mod-link" href="#${page.id}" data-id="${page.id}">${num}<span>${page.dataset.title}</span></a>` +
       `<button type="button" class="nav-chev" aria-label="Show sections" aria-expanded="false">${chev}</button></div>` +
-      `<div class="nav-subs">${kids.map((k) => `<a class="nav-sub" href="#${k.id}" data-id="${k.id}"><span class="nav-subnum">${k.dataset.sub}</span><span>${k.dataset.title}</span></a>`).join('')}</div></div>`);
+      `<div class="nav-subs">${kids.map((k) => `<a class="nav-sub${k.dataset.under ? ' nav-subsub' : ''}" href="#${k.id}" data-id="${k.id}"><span class="nav-subnum">${k.dataset.sub}</span><span>${k.dataset.title}</span></a>`).join('')}</div></div>`);
     const wrap = nav.lastElementChild;
     mods[page.id] = wrap;
     wrap.querySelectorAll('[data-id]').forEach((a) => { links[a.dataset.id] = a; });

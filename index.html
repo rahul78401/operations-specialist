@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/modules.css">
+  <link rel="stylesheet" href="css/styles.css?v=9">
+  <link rel="stylesheet" href="css/modules.css?v=9">
 </head>
 <body>
 
@@ -84,11 +84,16 @@
           </a>
           <a class="card" href="#session-6">
             <div class="card-top"><span class="card-num">Session 6</span></div>
-            <h3>Security and Data Handling</h3>
-            <p>Keep one customer's records away from everyone else.</p>
+            <h3>Quiz</h3>
+            <p>Test yourself on the Stripe API and troubleshooting.</p>
           </a>
           <a class="card" href="#session-7">
             <div class="card-top"><span class="card-num">Session 7</span></div>
+            <h3>Security and Data Handling</h3>
+            <p>Keep one customer's records away from everyone else.</p>
+          </a>
+          <a class="card" href="#session-8">
+            <div class="card-top"><span class="card-num">Session 8</span></div>
             <h3>Git, Linux and Basic Tooling</h3>
             <p>Trace a production issue from a log line to a query.</p>
           </a>
@@ -298,9 +303,12 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 6 ===================== -->
-    <section class="page" id="session-6" data-title="Security and Data Handling" data-number="6" hidden>
-      <p class="eyebrow">Session 6</p>
+    <!-- ===================== SESSION 6: Quiz (js/content/quiz.js) ===================== -->
+    <div data-include="quiz"></div>
+
+    <!-- ===================== SESSION 7 ===================== -->
+    <section class="page" id="session-7" data-title="Security and Data Handling" data-number="7" hidden>
+      <p class="eyebrow">Session 7</p>
       <h1 class="display">Security and Data Handling</h1>
       <p class="lead">You will have access to customer data. Learn who may do what, and how to keep secrets and personal data safe.</p>
 
@@ -322,9 +330,9 @@
       </div>
     </section>
 
-    <!-- ===================== SESSION 7 ===================== -->
-    <section class="page" id="session-7" data-title="Git, Linux and Basic Tooling" data-number="7" hidden>
-      <p class="eyebrow">Session 7</p>
+    <!-- ===================== SESSION 8 ===================== -->
+    <section class="page" id="session-8" data-title="Git, Linux and Basic Tooling" data-number="8" hidden>
+      <p class="eyebrow">Session 8</p>
       <h1 class="display">Git, Linux and Basic Tooling</h1>
       <p class="lead">Production issues are investigated from a terminal and a code repository. Learn the basics you need there.</p>
 
@@ -355,11 +363,12 @@
     <button type="button" class="pres-nav" id="pres-next" aria-label="Next slide"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
   </div>
 
-  <script src="js/illustrations.js"></script>
-  <script src="js/helpers.js"></script>
-  <script src="js/content/session-1.js"></script>
-  <script src="js/content/stripe.js"></script>
-  <script src="js/content/sql.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/illustrations.js?v=9"></script>
+  <script src="js/helpers.js?v=9"></script>
+  <script src="js/content/session-1.js?v=9"></script>
+  <script src="js/content/stripe.js?v=9"></script>
+  <script src="js/content/sql.js?v=9"></script>
+  <script src="js/content/quiz.js?v=9"></script>
+  <script src="js/app.js?v=9"></script>
 </body>
 </html>
