@@ -21,6 +21,7 @@ js/illustrations.js        SVG diagrams, placed with <figure data-fig="name" dat
 js/helpers.js              small HTML builders (block, table, code, task, module...)
 js/content/session-1.js    Session 1: REST APIs and Postman (sections, last one is Tasks)
 js/content/stripe.js       Session 2: Stripe (sections, last one is Tasks)
+js/content/session-4.js, session-5.js  Sessions 4 and 5
 js/app.js                  sidebar, routing, presentation mode, previous/next
 images/                    pictures used in Session 0
 ```
