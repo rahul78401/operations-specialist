@@ -1043,11 +1043,13 @@ curl -G https://api.stripe.com/v1/charges \\
       head: '<div class="theory-actions"><a class="theory-btn" href="#s6-set-four">Back to SQL Concepts</a></div>', blocks: sqlTheory },
     section('set-five', 'Reading SQL Queries', '20 questions. You see a query and explain what it returns. The options stay hidden until you ask for them.', SET5, theoryBtn('#s6-sql-theory'), true),
     section('set-six', 'Advanced SQL Reading', '20 questions. Harder queries: correlated subqueries, CASE, NOT EXISTS, and what a WHERE does to a LEFT JOIN. Options stay hidden until you ask.', SET6, theoryBtn('#s6-sql-theory'), true),
+    ...(Ops.docsPractice ? [Ops.docsPractice] : []),
+    ...(Ops.docsPractice2 ? [Ops.docsPractice2] : []),
   ];
 
   Ops.content['quiz'] = Ops.h.module({
     id: 'session-6', prefix: 's6', num: 6, title: 'Quiz',
-    lead: 'Six question sets on the Stripe API, SQL and cURL. Pick an answer: green means right, red means wrong.',
+    lead: 'Six question sets on the Stripe API, SQL and cURL, plus a docs practice set. Pick an answer: green means right, red means wrong. In the docs practice, find the answer in the Stripe docs first, then click Show answer.',
     subs,
   });
 
