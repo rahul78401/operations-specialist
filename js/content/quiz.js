@@ -1045,6 +1045,8 @@ curl -G https://api.stripe.com/v1/charges \\
     section('set-six', 'Advanced SQL Reading', '20 questions. Harder queries: correlated subqueries, CASE, NOT EXISTS, and what a WHERE does to a LEFT JOIN. Options stay hidden until you ask.', SET6, theoryBtn('#s6-sql-theory'), true),
     ...(Ops.docsPractice ? [Ops.docsPractice] : []),
     ...(Ops.docsPractice2 ? [Ops.docsPractice2] : []),
+    ...(Ops.docsPractice3 ? [Ops.docsPractice3] : []),
+    ...(Ops.docsPractice4 ? [Ops.docsPractice4] : []),
   ];
 
   Ops.content['quiz'] = Ops.h.module({
