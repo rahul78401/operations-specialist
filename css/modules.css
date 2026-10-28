@@ -96,6 +96,12 @@
 .solution .code, .solution .callout { margin-top: 0; background: #fff; color: var(--green-ink); }
 .solution .code { color: #1f1f1f; }
 .solution .tbl, .solution .code, .solution p + .tbl { margin-top: 12px; }
+.solution p + .topics, .solution p + .steps { margin-top: 12px; }
+
+/* Source line: the docs page a fact or an answer was read from */
+.src { margin-top: 18px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.src a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.solution .src { color: var(--green-ink); }
 
 /* ---------- Presentation mode ---------- */
 .pres-bar {

@@ -31,6 +31,11 @@
 
   const two = (a, b) => `<div class="two">${a}${b}</div>`;
 
+  /* "Source:" line under a fact or an answer: the docs page it was read from. items: [[url, page name], ...] */
+  const source = (items) =>
+    `<p class="src">${items.length > 1 ? 'Sources' : 'Source'}: ${items.map(([url, name]) =>
+      `${name} &mdash; <a href="${url}" target="_blank" rel="noopener">${url.replace(/^https?:\/\//, '')}</a>`).join('<br>')}</p>`;
+
   const methods = (rows) =>
     `<div class="methods">${rows.map(([m, what, ex]) => `<div class="method m-${m.toLowerCase()}"><b>${m}</b><span>${what}</span><code>${esc(ex)}</code></div>`).join('')}</div>`;
 
@@ -73,5 +78,5 @@
 
   window.Ops = window.Ops || {};
   Ops.content = Ops.content || {};
-  Ops.h = { esc, block, fig, code, table, list, steps, legend, callout, two, methods, groups, task, page, module };
+  Ops.h = { esc, block, fig, code, table, list, steps, legend, callout, two, source, methods, groups, task, page, module };
 })();

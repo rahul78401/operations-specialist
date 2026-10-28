@@ -1047,11 +1047,14 @@ curl -G https://api.stripe.com/v1/charges \\
     ...(Ops.docsPractice2 ? [Ops.docsPractice2] : []),
     ...(Ops.docsPractice3 ? [Ops.docsPractice3] : []),
     ...(Ops.docsPractice4 ? [Ops.docsPractice4] : []),
+    ...(Ops.docsPractice5 ? [Ops.docsPractice5] : []),
+    ...(Ops.docsPractice6 ? [Ops.docsPractice6] : []),
+    ...(Ops.advStripe || []),
   ];
 
   Ops.content['quiz'] = Ops.h.module({
     id: 'session-6', prefix: 's6', num: 6, title: 'Quiz',
-    lead: 'Six question sets on the Stripe API, SQL and cURL, plus a docs practice set. Pick an answer: green means right, red means wrong. In the docs practice, find the answer in the Stripe docs first, then click Show answer.',
+    lead: 'Six question sets on the Stripe API, SQL and cURL, plus a docs practice set. Pick an answer: green means right, red means wrong. In the docs practice, find the answer in the Stripe docs first, then click Show answer. Advanced Stripe Concepts, at the end, explains the ideas behind the questions.',
     subs,
   });
 
